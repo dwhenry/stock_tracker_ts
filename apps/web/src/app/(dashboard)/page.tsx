@@ -6,14 +6,7 @@ import {
   customerStocks,
 } from "@stock-tracker/database/schema";
 import { count, eq, sql } from "drizzle-orm";
-import styled from "styled-components";
-
-const StyledLink = styled(Link)`
-  position: absolute;
-  top: 0;
-  right: 20px;
-  z-index: 1000;
-`;
+import { SummaryCard } from "@/components/summary-card";
 
 export default async function DashboardPage() {
   const [customersCount] = await db.select({ value: count() }).from(customers);
@@ -58,73 +51,25 @@ export default async function DashboardPage() {
           marginBottom: "1.5rem",
         }}
       >
-        <div className="card" style={{ marginBottom: 0 }}>
-          <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
-            <span style={{ fontSize: "2rem" }}>👥</span>
-            <div>
-              <span
-                style={{
-                  display: "block",
-                  fontSize: "1.5rem",
-                  fontWeight: 600,
-                }}
-              >
-                {customersCount?.value ?? 0}
-              </span>
-              <span style={{ color: "var(--text-muted)" }}>Customers</span>
-            </div>
-            <Link
-              href="/customers"
-              className="btn btn-secondary btn-sm"
-              style={{ marginLeft: "auto" }}
-            >
-              Manage
-            </Link>
-          </div>
-        </div>
-        <div className="card" style={{ marginBottom: 0 }}>
-          <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
-            <span style={{ fontSize: "2rem" }}>📦</span>
-            <div>
-              <span
-                style={{
-                  display: "block",
-                  fontSize: "1.5rem",
-                  fontWeight: 600,
-                }}
-              >
-                {accessoriesCount?.value ?? 0}
-              </span>
-              <span style={{ color: "var(--text-muted)" }}>Accessories</span>
-            </div>
-            <Link
-              href="/accessories"
-              className="btn btn-secondary btn-sm"
-              style={{ marginLeft: "auto" }}
-            >
-              Manage
-            </Link>
-          </div>
-        </div>
-        <div className="card" style={{ marginBottom: 0 }}>
-          <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
-            <span style={{ fontSize: "2rem" }}>⚠️</span>
-            <div>
-              <span
-                style={{
-                  display: "block",
-                  fontSize: "1.5rem",
-                  fontWeight: 600,
-                }}
-              >
-                {lowCount}
-              </span>
-              <span style={{ color: "var(--text-muted)" }}>
-                Low stock alerts
-              </span>
-            </div>
-          </div>
-        </div>
+        <SummaryCard
+          name="Customers"
+          image="👥"
+          count={customersCount?.value}
+          href="/customers"
+        />
+        <SummaryCard
+          name="Accessories"
+          image="📦"
+          count={accessoriesCount?.value}
+          href="/accessories"
+        />
+        <SummaryCard
+          name="Low stock alerts"
+          image="⚠️"
+          count={lowCount}
+          href="/low-stock-alerts"
+          linkText="Low stock alerts"
+        />
       </div>
 
       {lowStockItems.length > 0 ? (
