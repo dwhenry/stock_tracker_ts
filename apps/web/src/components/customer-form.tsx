@@ -1,6 +1,6 @@
 "use client";
 
-import { useRouter } from "next/navigation";
+import { useRouter } from "next/router";
 import { useState } from "react";
 import { formDataFromElement } from "@/lib/form";
 
@@ -32,7 +32,6 @@ export function CustomerForm({
       return;
     }
     router.push("/customers");
-    router.refresh();
   }
 
   return (

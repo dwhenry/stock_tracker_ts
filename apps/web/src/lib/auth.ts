@@ -1,5 +1,6 @@
 import { SignJWT, jwtVerify } from "jose";
-import { cookies } from "next/headers";
+import type { IncomingMessage } from "node:http";
+import type { NextApiResponse } from "next";
 
 const COOKIE_NAME = "session";
 const JWT_SECRET = new TextEncoder().encode(
@@ -39,27 +40,31 @@ export async function verifyToken(token: string): Promise<JWTPayload | null> {
   }
 }
 
-export async function getSession(): Promise<JWTPayload | null> {
-  const cookieStore = await cookies();
-  const token = cookieStore.get(COOKIE_NAME)?.value;
+/** Request-like object with cookies (NextApiRequest or GetServerSidePropsContext.req) */
+type RequestWithCookies = IncomingMessage | { cookies?: Partial<Record<string, string>> };
+
+function getTokenFromRequest(req: RequestWithCookies): string | undefined {
+  const cookies = "cookies" in req && req.cookies ? req.cookies : undefined;
+  if (!cookies || typeof cookies !== "object") return undefined;
+  const session = (cookies as Record<string, string>)[COOKIE_NAME];
+  return session;
+}
+
+export async function getSessionFromRequest(req: RequestWithCookies): Promise<JWTPayload | null> {
+  const token = getTokenFromRequest(req);
   if (!token) return null;
   return verifyToken(token);
 }
 
-export async function setSessionCookie(token: string): Promise<void> {
-  const cookieStore = await cookies();
-  cookieStore.set(COOKIE_NAME, token, {
-    httpOnly: true,
-    secure: process.env.NODE_ENV === "production",
-    sameSite: "lax",
-    maxAge: MAX_AGE_SEC,
-    path: "/",
-  });
+export function setSessionCookieRes(res: NextApiResponse, token: string): void {
+  const secure = process.env.NODE_ENV === "production";
+  res.setHeader("Set-Cookie", [
+    `${COOKIE_NAME}=${token}; Path=/; HttpOnly; SameSite=Lax; Max-Age=${MAX_AGE_SEC}${secure ? "; Secure" : ""}`,
+  ]);
 }
 
-export async function deleteSessionCookie(): Promise<void> {
-  const cookieStore = await cookies();
-  cookieStore.delete(COOKIE_NAME);
+export function deleteSessionCookieRes(res: NextApiResponse): void {
+  res.setHeader("Set-Cookie", `${COOKIE_NAME}=; Path=/; HttpOnly; SameSite=Lax; Max-Age=0`);
 }
 
 export function isAdmin(payload: JWTPayload): boolean {

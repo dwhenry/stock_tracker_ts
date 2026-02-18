@@ -1,6 +1,6 @@
 "use client";
 
-import { useRouter } from "next/navigation";
+import { useRouter } from "next/router";
 import { useState } from "react";
 import { formDataFromElement } from "@/lib/form";
 
@@ -36,7 +36,6 @@ export function AccessoryForm({
       return;
     }
     router.push("/accessories");
-    router.refresh();
   }
 
   return (
