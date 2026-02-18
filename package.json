@@ -1,0 +1,20 @@
+{
+  "name": "stock-tracker",
+  "private": true,
+  "scripts": {
+    "dev": "pnpm --filter web dev",
+    "build": "pnpm --filter web build",
+    "db:generate": "pnpm --filter database generate",
+    "db:migrate": "pnpm --filter database migrate",
+    "db:push": "pnpm --filter database push",
+    "db:studio": "pnpm --filter database studio",
+    "db:seed": "pnpm --filter web seed"
+  },
+  "devDependencies": {
+    "typescript": "5.7.2"
+  },
+  "packageManager": "pnpm@9.14.2",
+  "engines": {
+    "node": ">=20"
+  }
+}
