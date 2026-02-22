@@ -1,19 +1,22 @@
 {
   "name": "stock-tracker",
   "private": true,
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
   "scripts": {
-    "dev": "pnpm --filter web dev",
-    "build": "pnpm --filter web build",
-    "db:generate": "pnpm --filter database generate",
-    "db:migrate": "pnpm --filter database migrate",
-    "db:push": "pnpm --filter database push",
-    "db:studio": "pnpm --filter database studio",
-    "db:seed": "pnpm --filter web seed"
+    "dev": "npm run dev -w web",
+    "build": "npm run build -w web",
+    "db:generate": "npm run generate -w @stock-tracker/database",
+    "db:migrate": "npm run migrate -w @stock-tracker/database",
+    "db:push": "npm run push -w @stock-tracker/database",
+    "db:studio": "npm run studio -w @stock-tracker/database",
+    "db:seed": "npm run seed -w web"
   },
   "devDependencies": {
     "typescript": "5.7.2"
   },
-  "packageManager": "pnpm@9.14.2",
   "engines": {
     "node": ">=20"
   }

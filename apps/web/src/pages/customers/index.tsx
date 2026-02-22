@@ -43,7 +43,10 @@ export default function CustomersPage({ list }: Props) {
             <tbody>
               {list.length === 0 ? (
                 <tr>
-                  <td colSpan={3} style={{ textAlign: "center", color: "var(--text-muted)" }}>
+                  <td
+                    colSpan={3}
+                    style={{ textAlign: "center", color: "var(--text-muted)" }}
+                  >
                     No customers yet. Add one to get started.
                   </td>
                 </tr>
@@ -53,10 +56,16 @@ export default function CustomersPage({ list }: Props) {
                     <td>{c.name}</td>
                     <td>{c.email}</td>
                     <td>
-                      <Link href={`/customers/${c.id}/stocks`} className="btn btn-sm btn-secondary">
+                      <Link
+                        href={`/customers/${c.id}/stocks`}
+                        className="btn btn-sm btn-secondary"
+                      >
                         Stock
                       </Link>{" "}
-                      <Link href={`/customers/${c.id}/edit`} className="btn btn-sm btn-secondary">
+                      <Link
+                        href={`/customers/${c.id}/edit`}
+                        className="btn btn-sm btn-secondary"
+                      >
                         Edit
                       </Link>{" "}
                       <DeleteCustomerButton id={c.id} name={c.name} />

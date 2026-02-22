@@ -4,7 +4,7 @@ A TypeScript/Next.js port of the Stock Tracker Rails app. Monorepo with Next.js 
 
 ## Stack
 
-- **Monorepo**: pnpm workspaces
+- **Monorepo**: npm workspaces
 - **App**: Next.js 15 (App Router), React 19
 - **Database**: MySQL, Drizzle ORM
 - **Auth**: JWT in HTTP-only cookie (no email in this version)
@@ -16,45 +16,51 @@ A TypeScript/Next.js port of the Stock Tracker Rails app. Monorepo with Next.js 
 
 ## Setup
 
-1. **Prerequisites**: Node 20+, pnpm, MySQL (e.g. local or Docker).
+1. **Prerequisites**: Node 20+, npm, MySQL (e.g. local or Docker).
 
 2. **Install**:
+
    ```bash
-   pnpm install
+   npm install
    ```
 
 3. **Database**: Create a MySQL database and set `DATABASE_URL`:
+
    ```bash
    export DATABASE_URL="mysql://root:password@localhost:3306/stock_tracker"
    ```
+
    Then create the DB (e.g. `CREATE DATABASE stock_tracker;`) and push schema:
+
    ```bash
-   pnpm db:push
+   npm run db:push
    ```
 
 4. **Seed** (creates admin user):
+
    ```bash
-   pnpm db:seed
+   npm run db:seed
    ```
+
    Default login: `admin@stock-tracker.com` / `password123` (change after first login).
 
 5. **Run**:
    ```bash
-   pnpm dev
+   npm run dev
    ```
    Open [http://localhost:3000](http://localhost:3000). Log in, then use Dashboard, Customers, Accessories, and (for admin) Users.
 
 ## Scripts
 
-| Command       | Description                    |
-|---------------|--------------------------------|
-| `pnpm dev`    | Start Next.js dev server       |
-| `pnpm build`  | Build web app                  |
-| `pnpm db:push`| Push Drizzle schema to MySQL   |
-| `pnpm db:generate` | Generate Drizzle migrations |
-| `pnpm db:migrate`  | Run migrations            |
-| `pnpm db:studio`  | Open Drizzle Studio      |
-| `pnpm db:seed`    | Seed admin user           |
+| Command              | Description                  |
+| -------------------- | ---------------------------- |
+| `npm run dev`        | Start Next.js dev server     |
+| `npm run build`      | Build web app                |
+| `npm run db:push`    | Push Drizzle schema to MySQL |
+| `npm run db:generate`| Generate Drizzle migrations  |
+| `npm run db:migrate` | Run migrations               |
+| `npm run db:studio`  | Open Drizzle Studio          |
+| `npm run db:seed`    | Seed admin user              |
 
 ## Features
 
@@ -68,7 +74,7 @@ A TypeScript/Next.js port of the Stock Tracker Rails app. Monorepo with Next.js 
 
 ## Env
 
-- `DATABASE_URL` – MySQL connection string (default: `mysql://root@localhost:3306/stock_tracker`).
+- `:` – MySQL connection string (default: `mysql://root@localhost:3306/stock_tracker`).
 - `JWT_SECRET` – Secret for signing JWTs (default: dev-only value; set in production).
 
 ## Differences from Rails version

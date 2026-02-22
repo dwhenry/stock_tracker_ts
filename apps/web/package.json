@@ -10,7 +10,7 @@
     "seed": "tsx scripts/seed.ts"
   },
   "dependencies": {
-    "@stock-tracker/database": "workspace:*",
+    "@stock-tracker/database": "*",
     "bcryptjs": "^2.4.3",
     "drizzle-orm": "^0.36.0",
     "jose": "^5.9.6",
