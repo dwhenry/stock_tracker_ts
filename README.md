@@ -45,30 +45,34 @@ A TypeScript/Next.js port of the Stock Tracker Rails app. Monorepo with Next.js 
    Default login: `admin@stock-tracker.com` / `password123` (change after first login).
 
 5. **Run**:
+
    ```bash
    npm run dev
    ```
+
    Open [http://localhost:3000](http://localhost:3000). Log in, then use Dashboard, Customers, Accessories, and (for admin) Users.
 
    For a full startup (migrate, seed, optional build, then start), e.g. in production or Docker:
+
    ```bash
    npm run boot
    ```
+
    Set `NODE_ENV=production` or `RUN_BUILD=1` to build before starting.
 
 ## Scripts
 
-| Command              | Description                                                  |
-| -------------------- | ------------------------------------------------------------ |
-| `npm run boot`       | Migrate, seed, then start (builds if `NODE_ENV=production` or `RUN_BUILD=1`) |
-| `npm run dev`        | Start Next.js dev server                                    |
-| `npm run start`      | Start production server (run `npm run build` first)          |
-| `npm run build`      | Build web app                                               |
-| `npm run db:push`    | Push Drizzle schema to MySQL |
-| `npm run db:generate`| Generate Drizzle migrations  |
-| `npm run db:migrate` | Run migrations               |
-| `npm run db:studio`  | Open Drizzle Studio          |
-| `npm run db:seed`    | Seed admin user              |
+| Command               | Description                                                                  |
+| --------------------- | ---------------------------------------------------------------------------- |
+| `npm run boot`        | Migrate, seed, then start (builds if `NODE_ENV=production` or `RUN_BUILD=1`) |
+| `npm run dev`         | Start Next.js dev server                                                     |
+| `npm run start`       | Start production server (run `npm run build` first)                          |
+| `npm run build`       | Build web app                                                                |
+| `npm run db:push`     | Push Drizzle schema to MySQL                                                 |
+| `npm run db:generate` | Generate Drizzle migrations                                                  |
+| `npm run db:migrate`  | Run migrations                                                               |
+| `npm run db:studio`   | Open Drizzle Studio                                                          |
+| `npm run db:seed`     | Seed admin user                                                              |
 
 ## Features
 
