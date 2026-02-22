@@ -6,7 +6,9 @@
     "packages/*"
   ],
   "scripts": {
+    "boot": "./scripts/boot.sh",
     "dev": "npm run dev -w web",
+    "start": "npm run start -w web",
     "build": "npm run build -w web",
     "db:generate": "npm run generate -w @stock-tracker/database",
     "db:migrate": "npm run migrate -w @stock-tracker/database",
